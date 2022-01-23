@@ -54,9 +54,6 @@ export const Movie = (props) => {
           <div className="data-col">
             <h2>Release year: {data?.year}</h2>
           </div>
-          {/* <div className="data-col">
-            <img alt="movie" src={data?.image} />
-          </div> */}
         </Col>
       </Row>
       <Row>

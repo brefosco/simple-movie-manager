@@ -5,7 +5,6 @@ import { Movie } from "./components/Movie";
 import UpdateMovie from "./components/UpdateMovie";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
-// import { getData } from "./services/moviesService";
 
 export const MovieContext = createContext({
   counter: 0,
@@ -14,7 +13,7 @@ export const MovieContext = createContext({
   setMovies: () => {},
 });
 
-// TODO: Add functionality to upload picture. WHERE?
+// TODO: Add functionality to upload picture.
 
 export function updateLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
@@ -32,8 +31,6 @@ function App() {
     parsedData && setMovies(parsedData);
     parsedCounter && setCounter(parsedCounter);
   }, []);
-
-  React.useEffect(() => {}, [movies]);
 
   return (
     <MovieContext.Provider value={{ movies, setMovies, counter, setCounter }}>

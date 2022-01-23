@@ -1,6 +1,6 @@
 {
   "short_name": "MovieFlix",
-  "name": "Simple movies app",
+  "name": "Personal movie management app",
   "icons": [
     {
       "src": "favicon.ico",

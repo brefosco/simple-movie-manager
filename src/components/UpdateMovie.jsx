@@ -17,7 +17,6 @@ const UpdateMovie = () => {
   const [rating, setRating] = useState("");
   const [year, setYear] = useState();
   const [personalOpinion, setPersonalOpinion] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
 
   React.useEffect(() => {
     if (location.state) {
@@ -27,7 +26,6 @@ const UpdateMovie = () => {
       setCrew(location.state.crew);
       setYear(location.state.year);
       setPersonalOpinion(location.state.personalOpinion);
-      // setImageUrl(location.state.image)
     }
   }, []);
 
@@ -43,7 +41,6 @@ const UpdateMovie = () => {
         crew: crew,
         year: year,
         personalOpinion: personalOpinion,
-        // imageUrl: imageUrl, TODO: Implement
       };
       const currentMovie = movies.findIndex(
         (movie) => movie.key === location.state.key
