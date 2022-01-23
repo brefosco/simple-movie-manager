@@ -33,8 +33,7 @@ function App() {
     parsedCounter && setCounter(parsedCounter);
   }, []);
 
-  React.useEffect(() => {
-  }, [movies]);
+  React.useEffect(() => {}, [movies]);
 
   return (
     <MovieContext.Provider value={{ movies, setMovies, counter, setCounter }}>

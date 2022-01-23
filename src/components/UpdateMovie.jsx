@@ -33,25 +33,45 @@ const UpdateMovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const movie = {
-      key: counter,
-      title: title,
-      rating: rating,
-      crew: crew,
-      year: year,
-      personalOpinion: personalOpinion,
-      // imageUrl: imageUrl, TODO: Implement
-    };
-    console.log(movie);
     const newMovies = !movies ? [] : movies;
-    newMovies.push(movie);
 
-    updateLocalStorage("myMovies", newMovies);
-    updateLocalStorage("localCounter", counter + 1);
-    setCounter(counter + 1);
-    setMovies(newMovies);
+    if (isUpdate) {
+      const movie = {
+        key: location.state.key,
+        title: title,
+        rating: rating,
+        crew: crew,
+        year: year,
+        personalOpinion: personalOpinion,
+        // imageUrl: imageUrl, TODO: Implement
+      };
+      const currentMovie = movies.findIndex(
+        (movie) => movie.key === location.state.key
+      );
 
-    history.push("/");
+      console.log("updating");
+      newMovies[currentMovie] = movie;
+      updateLocalStorage("myMovies", newMovies);
+      setMovies(newMovies);
+
+      history.push("/");
+    } else {
+      const movie = {
+        key: counter,
+        title: title,
+        rating: rating,
+        crew: crew,
+        year: year,
+        personalOpinion: personalOpinion,
+        // imageUrl: imageUrl, TODO: Implement
+      };
+      newMovies.push(movie);
+      updateLocalStorage("myMovies", newMovies);
+      updateLocalStorage("localCounter", counter + 1);
+      setCounter(counter + 1);
+      setMovies(newMovies);
+      history.push("/");
+    }
   };
 
   return (

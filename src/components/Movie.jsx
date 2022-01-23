@@ -36,11 +36,7 @@ export const Movie = (props) => {
             <Link to={{ pathname: `/newmovie`, state: data }}>
               <img alt="edit movie" src={EditIcon} className="icon right" />
             </Link>
-            <div
-              onClick={(e) => {
-                deleteMovie(e);
-              }}
-            >
+            <div onClick={deleteMovie}>
               <img alt="delete movie" src={DeleteIcon} className="icon right" />
             </div>
           </Col>
