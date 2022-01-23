@@ -5,22 +5,22 @@ import BackIcon from "../resources/back_icon.svg";
 import "./styles.css";
 
 const UpdateMovie = () => {
-  const [title, setTitle] = useState("");
-  const [cast, setCast] = useState();
-  const [rating, setRating] = useState("");
-  const [genres, setGenres] = useState();
-  const [year, setYear] = useState();
   const location = useLocation();
+  const [title, setTitle] = useState("");
+  const [crew, setCrew] = useState();
+  const [rating, setRating] = useState("");
+  const [year, setYear] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
 
   React.useEffect(() => {
     if (location.state) {
       setIsUpdate(true);
-      setTitle(location.state.primaryTitle);
-      setRating(location.state.rating);
-      setCast(location.state.cast.map((person) => person.actor));
-      setYear(location.state.startYear);
-      setGenres(location.state.genres);
+      setTitle(location.state.title);
+      setRating(location.state.imDbRating);
+      setCrew(location.state.crew);
+      setYear(location.state.year);
+      // setImageUrl(location.state.image)
     }
   }, []);
 
@@ -29,9 +29,9 @@ const UpdateMovie = () => {
     const movie = {
       title: title,
       rating: rating,
-      cast: cast,
+      crew: crew,
       year: year,
-      genres: genres,
+      imageUrl: imageUrl,
     };
     console.log(movie);
     alert(movie.title);
@@ -59,9 +59,9 @@ const UpdateMovie = () => {
               <Form.Control
                 className="form-input"
                 type="text"
-                placeholder="Cast"
-                value={cast}
-                onChange={(e) => setCast(e.target.value)}
+                placeholder="Crew"
+                value={crew}
+                onChange={(e) => setCrew(e.target.value)}
               />
             </Col>
           </Row>
@@ -85,15 +85,6 @@ const UpdateMovie = () => {
               />
             </Col>
           </Row>
-          <Col>
-            <Form.Control
-              className="form-input"
-              type="text"
-              placeholder="Genres"
-              value={genres}
-              onChange={(e) => setGenres(e.target.value)}
-            />
-          </Col>
           <Row>
             <Col xs={12}>
               <div>

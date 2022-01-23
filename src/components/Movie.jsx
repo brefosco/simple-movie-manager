@@ -30,39 +30,35 @@ export const Movie = (props) => {
       <Row>
         <Col>
           <div className="data-col">
-            <h1>{data?.primaryTitle}</h1>
+            <h1>{data?.title}</h1>
           </div>
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="data-col">
-            <h2>{data?.startYear}</h2>
+            <h2>Release year: {data?.year}</h2>
           </div>
           <div className="data-col">
-            <h2>
-              Genres: <i>{data?.genres}</i>
-            </h2>
+            <h4>IMDB rank: {data?.rank}</h4>
           </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
           <div className="data-col">
-            <h4> Cast &#38; crew: </h4>
-            {data?.cast.map((member, key) => (
-              <span key={key}>
-                {member.actor} as <i>{member.character}</i>
-                <br />
-              </span>
-            ))}
+            <img alt="movie" src={data?.image} />
           </div>
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="data-col">
-            <h3>Rating: {data?.rating}</h3>
+            <h4> Crew:</h4>
+            <p>{data?.crew}</p>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className="data-col">
+            <h3>IMDB Rating: {data?.imDbRating}</h3>
           </div>
         </Col>
       </Row>

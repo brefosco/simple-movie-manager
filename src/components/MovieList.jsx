@@ -84,9 +84,9 @@ export const MovieList = (props) => {
                 className="goto-details"
               >
                 <StyledCardBody>
-                  <Card.Title>{movie.primaryTitle}</Card.Title>
+                  <Card.Title>{movie.fullTitle}</Card.Title>
 
-                  <Card.Text>{movie.rating}</Card.Text>
+                  {/* <Card.Text>{movie.rating}</Card.Text> */}
                   <StyledCardFooter className="align-bottom">
                     <div>Details</div>
                   </StyledCardFooter>

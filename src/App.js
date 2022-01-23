@@ -10,18 +10,28 @@ import { getData } from "./services/moviesService";
 export const MovieContext = createContext({
   movies: [],
   setMovies: () => {},
+  allMovies: [],
+  setAllMovies: () => {},
 });
+
+// TODO: Add functionality to upload picture. WHERE? 
 
 function App() {
   const [movies, setMovies] = useState();
+  const [allMovies, setAllMovies] = useState();
 
   const getDataLocal = async () => {
-    return await getData();
+    // const response = await getData()
+    const response = await getData();
+    console.log(response.data);
+    setAllMovies(response.data.items);
+    return response.data.items.slice(0, 10);
   };
 
   useEffect(() => {
     getDataLocal().then((data) => {
-      setMovies(data.data);
+      console.log(data);
+      data && setMovies(data);
     });
   }, []);
 
