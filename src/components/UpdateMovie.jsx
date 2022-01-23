@@ -1,40 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { MovieContext, updateLocalStorage } from "../App";
 import { useLocation, Link } from "react-router-dom";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import BackIcon from "../resources/back_icon.svg";
 import "./styles.css";
 
 const UpdateMovie = () => {
   const location = useLocation();
+  const history = useHistory();
+  const { movies, setMovies, counter, setCounter } = useContext(MovieContext);
+
+  const [isUpdate, setIsUpdate] = useState(false);
   const [title, setTitle] = useState("");
-  const [crew, setCrew] = useState();
+  const [crew, setCrew] = useState("");
   const [rating, setRating] = useState("");
   const [year, setYear] = useState();
-  const [imageUrl, setImageUrl] = useState("");
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [personalOpinion, setPersonalOpinion] = useState("");
 
   React.useEffect(() => {
     if (location.state) {
       setIsUpdate(true);
       setTitle(location.state.title);
-      setRating(location.state.imDbRating);
+      setRating(location.state.rating);
       setCrew(location.state.crew);
       setYear(location.state.year);
-      // setImageUrl(location.state.image)
+      setPersonalOpinion(location.state.personalOpinion);
     }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const movie = {
-      title: title,
-      rating: rating,
-      crew: crew,
-      year: year,
-      imageUrl: imageUrl,
-    };
-    console.log(movie);
-    alert(movie.title);
+    const newMovies = !movies ? [] : movies;
+
+    if (isUpdate) {
+      const movie = {
+        key: location.state.key,
+        title: title,
+        rating: rating,
+        crew: crew,
+        year: year,
+        personalOpinion: personalOpinion,
+      };
+      const currentMovie = movies.findIndex(
+        (movie) => movie.key === location.state.key
+      );
+
+      console.log("updating");
+      newMovies[currentMovie] = movie;
+      updateLocalStorage("myMovies", newMovies);
+      setMovies(newMovies);
+
+      history.push("/");
+    } else {
+      const movie = {
+        key: counter,
+        title: title,
+        rating: rating,
+        crew: crew,
+        year: year,
+        personalOpinion: personalOpinion,
+        // imageUrl: imageUrl, TODO: Implement
+      };
+      newMovies.push(movie);
+      updateLocalStorage("myMovies", newMovies);
+      updateLocalStorage("localCounter", counter + 1);
+      setCounter(counter + 1);
+      setMovies(newMovies);
+      history.push("/");
+    }
   };
 
   return (
@@ -70,7 +104,7 @@ const UpdateMovie = () => {
               <Form.Control
                 className="form-input"
                 type="number"
-                placeholder="year"
+                placeholder="Year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
               />
@@ -78,10 +112,23 @@ const UpdateMovie = () => {
             <Col>
               <Form.Control
                 className="form-input"
-                type="text"
+                type="number"
+                min={1}
+                max={10}
                 placeholder="Rating"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <textarea
+                className="form-input w-100 form-control"
+                rows={4}
+                placeholder="Your own personal opinion of the movie/show"
+                onChange={(e) => setPersonalOpinion(e.target.value)}
+                value={personalOpinion}
               />
             </Col>
           </Row>

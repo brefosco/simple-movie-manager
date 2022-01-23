@@ -1,13 +1,19 @@
-# Simple movie management app
+# Simple cache-based personal movie management app
 
 ## Overview
 
 App made with Create React App
 
-Install dependencies with yarn
+Stores movie data in local storage (cache) and displays it back.
 
-Run app with yarn start
+## Installation
 
-BE-Response.json file is the API Response given by the Back-End
+Install dependencies with **yarn**
 
-Example response: [{primaryTitle: "", cast: [{actor: "", character: ""}], rating: 8, startYear: 1992, genres: "" }]
+Run app with **yarn start**
+
+Build app with **yarn build**
+
+## TODO:
+
+- Add Image support

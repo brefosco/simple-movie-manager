@@ -13,7 +13,7 @@ const Title = (props) => {
       <Row>
         <Col>
           <StyledDiv>
-            <h1>Simple Movie manager</h1>
+            <h1>Movie manager! </h1>
           </StyledDiv>
         </Col>
       </Row>
