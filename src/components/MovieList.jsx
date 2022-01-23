@@ -9,7 +9,9 @@ import "./styles.css";
 
 export const MovieList = (props) => {
   const { movies } = useContext(MovieContext);
-  const [sortedMovies, setSortedMovies] = useState();
+  const [sortedMovies, setSortedMovies] = useState(
+    movies === undefined ? [] : movies
+  );
   const [orderBy, setOrderBy] = useState("Ascendent");
 
   const StyledCardBody = styled(Card.Body)`
@@ -36,7 +38,11 @@ export const MovieList = (props) => {
   `;
 
   React.useEffect(() => {
-    setSortedMovies(movies);
+    if (movies === undefined) {
+      setSortedMovies([]);
+    } else {
+      setSortedMovies(movies);
+    }
   }, [movies]);
 
   const handleSort = () => {
@@ -44,20 +50,12 @@ export const MovieList = (props) => {
     setOrderBy(orderBy === "Ascendent" ? "Descendent" : "Ascendent");
     if (orderBy === "Ascendent") {
       newMovies.sort((a, b) => {
-        return a.primaryTitle > b.primaryTitle
-          ? 1
-          : b.primaryTitle > a.primaryTitle
-          ? -1
-          : 0;
+        return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
       });
     }
     if (orderBy === "Descendent") {
       newMovies.sort((a, b) => {
-        return a.primaryTitle > b.primaryTitle
-          ? -1
-          : b.primaryTitle > a.primaryTitle
-          ? 1
-          : 0;
+        return a.title > b.title ? -1 : b.title > a.title ? 1 : 0;
       });
     }
     setSortedMovies(newMovies);
@@ -84,9 +82,9 @@ export const MovieList = (props) => {
                 className="goto-details"
               >
                 <StyledCardBody>
-                  <Card.Title>{movie.fullTitle}</Card.Title>
-
-                  {/* <Card.Text>{movie.rating}</Card.Text> */}
+                  <Card.Title>
+                    {movie.title} ({movie.year})
+                  </Card.Title>
                   <StyledCardFooter className="align-bottom">
                     <div>Details</div>
                   </StyledCardFooter>
